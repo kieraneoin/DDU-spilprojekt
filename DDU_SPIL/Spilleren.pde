@@ -1,42 +1,40 @@
 class spilleren {
 
-  int W = 394;
-  int W2 = 4;
-  
+  int H = 594;
+  int H2 = 4;
+
   float posX, posY; 
-  
-  spilleren(){
-    posX = 200;
+
+  spilleren() {
+    posX = 100;
     posY = 350;
   }
-  
-  void moveSpiller(){
-    if (keyPressed && keyCode== LEFT){
-    posX -= 5;
-    }
-  if (keyPressed && keyCode== RIGHT){
-    posX += 5;
-  }
-  }
-  
- void display(){
-   noStroke();
-   ellipse(posX, posY,30, 30);
-   rect(posX-5, posY-30, 10, 20);
-   
 
- }
-  
-  void kanonkugle(){
-    ellipse(posX-40,posY-40,10,10);
-  }
-  
-  void vaegge(){
-   if (posX - 10 < W2) { 
-      posX = W2 + 10; 
+  void moveSpiller() {
+    if (keyPressed && keyCode== UP) {
+      posY -= 5;
     }
-    if (posX + 10 > W) { 
-      posX = W - 10;
+    if (keyPressed && keyCode== DOWN) {
+      posY += 5;
+    }
+  }
+
+  void display() {
+    noStroke();
+    ellipse(posX, posY, 30, 30);
+    rect(posX+5, posY-5, 20, 10);
+  }
+
+  void kanonkugle() {
+    ellipse(posX+5, posY+5, 10, 10);
+  }
+
+  void vaegge() {
+    if (posY - 10 < H2) { 
+      posY = H2 + 10;
+    }
+    if (posY + 10 > H) { 
+      posY = H - 10;
     }
   }
 }

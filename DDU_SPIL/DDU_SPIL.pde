@@ -1,7 +1,8 @@
-ArrayList<kanonkugle> list2 = new ArrayList<kanonkugle>();
-fjende[] list = new fjende[20];
+ArrayList<kanonkugle> kugleList = new ArrayList<kanonkugle>();
+ArrayList<fjende> fjendeList = new ArrayList<fjende>();
 spilleren s = new spilleren();
-//float posX, posY; 
+
+
 
 
 void settings() {
@@ -11,10 +12,13 @@ void settings() {
 void setup() {
   frameRate(60);
 
-  for (int i = 0; i < list.length; i++) {
-    list[i] = new fjende(random(1000, 1100), random(0, height), -0.5, 0);
+  for (int i = 0; i < 20; i++) {
+    fjende f =new fjende(random(1000, 1100), random(0, height), -0.5, 0);
+      fjendeList.add(f);
+   
   }
 }
+
 
 void draw() {
   clear();
@@ -24,20 +28,42 @@ void draw() {
   s.moveSpiller();
 
   if (keyPressed && key == ' ') {
-    list2.add(new kanonkugle(s.posX, s.posY));
+    kugleList.add(new kanonkugle(s.posX, s.posY));
   }
 
-  for (int i = 0; i<list2.size(); i++) {
-    kanonkugle k = list2.get(i);
+  for (int i = 0; i<kugleList.size(); i++) {
+    kanonkugle k = kugleList.get(i);
     k.display();
     k.move();
   }
 
-  for (int i = 0; i < list.length; i++) {
-    list[i].display();
-    list[i].move();
+  for (int i = 0; i < fjendeList.size(); i++) {
+    fjende f = fjendeList.get(i);
+    f.display();
+    f.move();
   }
-  
+
+  for (int i = 0; i < kugleList.size()-1; i++) {
+    kanonkugle k2 = kugleList.get(i);
+
+    for (int j = 0; j<fjendeList.size(); j++) {
+      fjende f = fjendeList.get(j);
+      
+      if (dist(kugleList.get(i).posX,kugleList.get(i).posY,fjendeList.get(j).xPos,fjendeList.get(j).yPos) < 10){
+      println("Habibi");
+      kugleList.remove(i);
+      fjendeList.remove(j);
+  }
+}
+  }
+}
+
+void restart() { 
+ 
+  for (int i = 0; i < 20; i++) {
+    fjende f =new fjende(random(1000, 1100), random(0, height), -3, 0);
+      fjendeList.add(f);
+  }
 }
 
 void keyPressed() {
@@ -47,4 +73,10 @@ void keyPressed() {
 
   if (keyCode== DOWN) {
   }
+  
+  if (key == 'r'){
+    restart();
+  
+  
+}
 }
