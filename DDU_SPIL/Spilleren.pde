@@ -61,6 +61,7 @@ class spilleren {
 
 
   void win() {
+    textFont(createFont("Arial", 14));
     if (fjendeList.size() <= 0) {
       s.running = false; 
       textSize(60);
